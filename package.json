@@ -58,7 +58,7 @@
   "scripts": {
     "build": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/extension.js --sourcemap",
     "typecheck": "tsc --noEmit -p .",
-    "test": "tsc -p tsconfig.test.json && node --test out/test/unit/",
+    "test": "tsc -p tsconfig.test.json && node --test \"out/test/unit/*.test.js\"",
     "test:e2e": "npm run build && tsc -p tsconfig.test.json && node out/test/e2e/run.js",
     "package": "npm run build && vsce package --no-dependencies --skip-license",
     "vscode:prepublish": "npm run build"
