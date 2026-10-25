@@ -1,0 +1,74 @@
+{
+  "name": "happyview",
+  "displayName": "HappyView",
+  "description": "Build diagnostics and lexicon ↔ handler navigation for HappyView projects.",
+  "version": "0.1.0",
+  "publisher": "happyproto",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/happyproto/vscode-happyview.git"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/happyview.toml"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "happyview.check",
+        "title": "Check the project",
+        "category": "HappyView"
+      },
+      {
+        "command": "happyview.goToCounterpart",
+        "title": "Go to lexicon / handler",
+        "category": "HappyView"
+      },
+      {
+        "command": "happyview.createHandler",
+        "title": "Create handler",
+        "category": "HappyView"
+      },
+      {
+        "command": "happyview.showOutput",
+        "title": "Show output",
+        "category": "HappyView"
+      }
+    ],
+    "configuration": {
+      "title": "HappyView",
+      "properties": {
+        "happyview.hpyPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "description": "The hpy executable to run. Empty means hpy on PATH."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/extension.js --sourcemap",
+    "typecheck": "tsc --noEmit -p .",
+    "test": "tsc -p tsconfig.test.json && node --test out/test/unit/",
+    "test:e2e": "npm run build && tsc -p tsconfig.test.json && node out/test/e2e/run.js",
+    "package": "npm run build && vsce package --no-dependencies --skip-license",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/vscode": "1.95.0",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "typescript": "5.6.3"
+  }
+}

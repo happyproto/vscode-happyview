@@ -1,0 +1,22 @@
+{
+  "ok": false,
+  "diagnostics": [
+    { "path": "src/lexicons/com/example/getThing.lua", "line": 3, "severity": "error",
+      "message": "lua: unexpected symbol near 'end'" }
+  ],
+  "files": [
+    { "path": "src/lexicons/com/example/getThing.json", "role": "lexicon" },
+    { "path": "src/lexicons/com/example/getThing.lua", "role": "handler",
+      "trigger": "xrpc.query:com.example.getThing", "lexicon": "com.example.getThing", "language": "lua" },
+    { "path": "src/lexicons/com/example/listThings.json", "role": "lexicon" },
+    { "path": "src/lexicons/com/example/post.create.lua", "role": "handler",
+      "trigger": "record.create:com.example.post", "lexicon": "com.example.post", "language": "lua" },
+    { "path": "src/lexicons/com/example/post.json", "role": "lexicon" }
+  ],
+  "lexicons": [
+    { "nsid": "com.example.getThing", "path": "src/lexicons/com/example/getThing.json", "kind": "query" },
+    { "nsid": "com.example.listThings", "path": "src/lexicons/com/example/listThings.json", "kind": "query" },
+    { "nsid": "com.example.post", "path": "src/lexicons/com/example/post.json", "kind": "record" }
+  ],
+  "languages": [ { "language_id": "lua", "extensions": ["lua"] } ]
+}
