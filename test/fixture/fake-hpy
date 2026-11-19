@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+// Stands in for hpy: prints the canned report beside it, and records each
+// run so the test can see one happened.
+const fs = require("node:fs");
+const path = require("node:path");
+fs.appendFileSync(path.join(process.cwd(), "runs.log"), process.argv.slice(2).join(" ") + "\n");
+process.stdout.write(fs.readFileSync(path.join(__dirname, "report.json"), "utf8"));
+process.exitCode = 1;

@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      # VS Code needs a display, even for tests.
+      - run: xvfb-run -a npm run test:e2e
+      - run: npx vsce package --no-dependencies --skip-license --out happyview.vsix
+      - uses: actions/upload-artifact@v4
+        with:
+          name: happyview-vsix
+          path: happyview.vsix
